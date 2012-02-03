@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Validação de Formulários</title>
+	<link rel="stylesheet" href="http://ww2.telecontrol.com.br/mlg/consultas.css" />
+	<link rel="stylesheet" href="css/slider.css" />
+	<link rel="stylesheet" href="js/jscalendar/skins/aqua/theme.css" />
+	<link rel="stylesheet" href="js/jscalendar/calendar-win2k-2.css" />
+	<link rel="stylesheet" href="css/form.css" />
+	<link rel="stylesheet" href="ckeditor/skins/kama/templates.css" />
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.maskedinput-1.2.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/slider.js"></script>
+	<script type="text/javascript" src="jscolor/jscolor.js"></script>
+	<script type="text/javascript" src="js/calendar.js"></script>
+	<script type="text/javascript" src="js/jscalendar/lang/calendar-en.js"></script>
+	<script type="text/javascript" src="js/calendar-setup.js"></script>
+	<script type="text/javascript" src="js/webforms_2.js"></script>
+	<script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+	<script type="text/javascript" src="js/EventHelpers.js"></script>
+	<script type="text/javascript" src="js/html5Widgets.js"></script>
+	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="ckeditor/skins/kama/skin.js"></script>
+	<script type="text/javascript">
+	$(function() {
+			/*
+*/
+		$('form[name=exemplo]').validate({
+									rules: {
+										cnpj: 'cnpj',
+										cpf:  'cpf'
+									}
+								});
+		$('input.fone').mask("(99) 9999-9999",{placeholder:" "})
+				   .blur(function () {
+						$('input[name=cep]').focus();
+				   });
+		$('input[name=cep]').mask("99999-999",{placeholder:" "});
+		$('input[name=numero]').blur(function () {
+			if ($('input[name=cep]').val().length == 9) $('input[name=cnpj]').focus();
+		});
+		$('input[name=estado]').mask("aa",{placeholder:" "}).css('text-transform','uppercase');
+		$('input[name=cpf]').mask("999.999.999-99",{placeholder:" "});
+		$('input[name=cnpj]').mask("99.999.999/9999-99",{placeholder:" "});
+		$('input[name*=valor]').mask("R$ 0.009,99");
+		//"99.999.999/9999-99" CNPJ
+		$('#trans').change(function() {$('#color').change();});
+		$('#color').change(function() {
+			var colorEl = document.getElementById('color');
+			var cor = '#' + $(this).val();
+
+			var r =	colorEl.color.rgb[0]*100;
+			var g =	colorEl.color.rgb[1]*100;
+			var b = colorEl.color.rgb[2]*100;
+
+			var o = $('#trans').val();
+			if (o.length < 2) {
+				o = '0' + o;
+			}
+
+			//console.log("Transparência: " + o);
+
+			if (o != '100') {
+				cor = 'rgba(' + r +'%,'+ g +'%,'+ b +'%, 0.'+ o + ')';
+			}
+
+			//console.log(cor);
+			$('body').css('background-color', cor);
+		});
+	});
+	</script>
+	<style type="text/css">
+	body {
+		background-image: url();
+	}
+	label {
+		display: block;
+		font-size: 0.8em;
+		color: #003;
+		font-weight: bold;
+	}
+	input[type=time] {
+		width: 4em;
+		text-align: center;
+	}
+	fieldset.col p {
+		float:left;
+		clear:none;
+		display:inline-block;
+		width:45%;
+		margin: auto 2%;
+		vertical-align: top;
+	}
+	</style>
+</head>
+<body>
+	<h1></h1>
+	<form action="" name='exemplo'i oninput='opaque.value = trans.value.parseInt'>
+		<fieldset class='col'>
+			<legend>Campos Especiais</legend>
+			<label for="color">Cor padrão</label>
+			<input type="color" value class='color' id='color' style='width:5em' />
+			<label for="trans" style='display:inline-block'>Opacidade:</label>
+			<input type="range" id="trans" value='85' min='50' max='100' step='5' />
+			<output for='trans' name='opaque'>85</output> %
+			<br />
+			<p>
+			<label for="tipoCel">Tipo de Celular</label>
+			<select id="tipoCel" multiple name="celType" >
+				<option value="">iPhone</option>
+				<option value="">BalckBerry</option>
+				<option value="">Galaxy 5s</option>
+				<option value="">Galaxy Tablet</option>
+				<option value="">iPad</option>
+				<option value="">Outros</option>
+			</select>
+			</p>
+			<p>
+				<label for="arquivo">Enviar imagem</label>
+				<input id="arquivo" name="arquivos[]" type="file" multiple='multiple' />
+			</p>
+		</fieldset>
+		<br />
+		<br />
+		<fieldset>
+			<legend>Campos de Data ou hora</legend>
+			<label for="data">Data</label>
+		<input type="date" id="date" required />
+		<label for="mes_sel">Selecione o Mês</label>
+		<select id="mes_sel" name="mes">
+			<option value=""></option>
+			<option value="1">Jan</option>
+			<option value="2">Fev</option>
+			<option value="3">Mar</option>
+			<option value="4">Abr</option>
+			<option value="5">Mai</option>
+			<option value="6">Jun</option>
+			<option value="7">Jul</option>
+			<option value="8">Ago</option>
+			<option value="9">Set</option>
+			<option value="10">Out</option>
+			<option value="11">Nov</option>
+			<option value="12">Dez</option>
+		</select>
+		<label for="diaehora">Hora de agendamento</label>
+		<input id="diaehora" type="datetime-local" value min="2012-01-15"  />
+		<label for="duracao">Duração</label>
+		<input id="duracao" type="time" required />
+		</fieldset>
+		<br />
+		<br />
+		<fieldset style="width:800px">
+			<legend>Campos de texto</legend>
+			<label for="word">Só letras</label>
+			<input type="text" id='word' placeholder='usuario' pattern="[A-Za-z]+" />
+			<label for="palavra">Só letras (e acentos)</label>
+			<input type="text" id='palavra' placeholder='Nome Completo' pattern='\w+\s\w+' />
+			<label for="">Texto livre</label>
+			<input type="text" />
+			<div style="float:right">
+				<label for="html">Editor Completo</label>
+				<textarea id="html" name="htmlText" rows="10" class="ckeditor" cols="30"></textarea>
+			</div>
+		</fieldset>
+		<br />
+		<br />
+		<fieldset class='col'>
+			<legend>Campos Numéricos</legend>
+			<p>
+				<label for="cep">CEP</label>
+				<input type="text" id="cep" name="cep" />
+				<label for="fone">Telefone BR</label>
+				<input type="text" id='fone' placeholder='Telefone' class='fone' name='fone' />
+			</p>
+			<p>
+				<label for="cpf">CPF</label>
+				<input type="text" id='cpf' class='cpf' name='cpf' required placeholder='CPF do cliente' />
+				<label for="CNPJ">CNPJ</label>
+				<input type="text" class="CNPJ" name='cnpj' id='cnpj' placeholder="Digite o CNPJ do Provedor" />
+			</p>
+			<label for="valor">Valor Total</label>
+			<input type="text" id="valor" name="valor" />
+			<label for=""></label>
+			<input type="" />
+			<label for=""></label>
+			<input type="" />
+			<label for=""></label>
+			<input type="" />
+		</fieldset>
+		<fieldset class='col'>
+			<p><button class='gStyle'>Enviar</button></p>
+			<p><button class='gStyle' type="reset">Redefinir</button></p>
+		</fieldset>
+	</form>
+</body>
+</html>
