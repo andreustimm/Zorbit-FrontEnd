@@ -47,7 +47,7 @@ Calendar._SDN = new Array
 Calendar._MN = new Array
 ("Janeiro",
  "Fevereiro",
- "Marco",
+ "Março",
  "Abril",
  "Maio",
  "Junho",
@@ -75,23 +75,23 @@ Calendar._SMN = new Array
 
 // tooltips
 Calendar._TT = {};
-Calendar._TT["INFO"] = "Sobre o calendario";
+Calendar._TT["INFO"] = "Sobre o calendário";
 
 Calendar._TT["ABOUT"] =
 "DHTML Date/Time Selector\n" +
 "(c) dynarch.com 2002-2005 / Author: Mihai Bazon\n" + // don't translate this this ;-)
-"Ultima versao visite: http://www.dynarch.com/projects/calendar/\n" +
+"Ultima versão visite: http://www.dynarch.com/projects/calendar/\n" +
 "Distribuido sobre GNU LGPL.  Veja http://gnu.org/licenses/lgpl.html para detalhes." +
 "\n\n" +
 "Selecao de data:\n" +
-"- Use os botoes \xab, \xbb para selecionar o ano\n" +
-"- Use os botoes " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " para selecionar o mes\n" +
-"- Segure o botao do mouse em qualquer um desses botoes para selecao rapida.";
+"- Use os botões \xab, \xbb para selecionar o ano\n" +
+"- Use os botões " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " para selecionar o mes\n" +
+"- Segure o botão do mouse em qualquer um desses botões para selecão rapida.";
 Calendar._TT["ABOUT_TIME"] = "\n\n" +
-"Selecao de hora:\n" +
+"Selecão de hora:\n" +
 "- Clique em qualquer parte da hora para incrementar\n" +
 "- ou Shift-click para decrementar\n" +
-"- ou clique e segure para selecao rapida.";
+"- ou clique e segure para selecão rapida.";
 
 Calendar._TT["PREV_YEAR"] = "Ant. ano (segure para menu)";
 Calendar._TT["PREV_MONTH"] = "Ant. mes (segure para menu)";

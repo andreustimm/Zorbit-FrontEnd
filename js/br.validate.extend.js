@@ -2,17 +2,17 @@
 jQuery.validator.addMethod(
   "dateBR",
   function(value, element) {
-	var val_exp=value.split('/');
+	var val_exp=value.split(/[/-.]]/);
   	if(val_exp.length==3){
       var ano=val_exp[2];
       var mes=val_exp[1];
       var dia=val_exp[0];
       if((ano>=1000)&&(ano<10000)){
-        if(((mes=='01')||(mes=='03')||(mes=='05')||(mes=='07')||(mes=='08')||(mes=='10')||(mes=='12'))&&(dia.match(/^(0[1-9]|[1-2][0-9]|3[0-1])$/))){
+        if((mes.match('0[13578]|10|12'))&&(dia.match(/^(0[1-9]|[1-2][0-9]|3[0-1])$/))){
           return true;
-        }else if(((mes=='04')||(mes=='06')||(mes=='09')||(mes=='07')||(mes=='08')||(mes=='11'))&&(dia.match(/^(0[1-9]|[1-2][0-9]|30)$/))){
+        }else if((mes.match('0[469]|11'))&&(dia.match(/^(0[1-9]|[1-2][0-9]|30)$/))){
           return true;
-        }else if((mes=='02')&&(dia.match(/^(0[1-9]|1[0-9]|2[0-8])$/))){
+        }else if((mes=='02')&&(dia.match(/^([01][1-9]|2[0-8])$/))){
           return true;
         }else if((mes=='02')&&(dia=='29')&&((ano%400==0)||((ano%4==0)&&(ano%100!=0)))){
           return true;
@@ -26,7 +26,7 @@ jQuery.validator.addMethod(
       if(jQuery(element).val().length==0) return true; else return false;
     }
   },
-  "Data inválida"
+  "Data invÃ¡lida"
 );
 
 jQuery.validator.addMethod("cpf", function(value, element) {
@@ -49,7 +49,7 @@ jQuery.validator.addMethod("cpf", function(value, element) {
 	if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11-x; }
 	if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) return false;
 	return true;
-}, "Informe um CPF válido."); // Mensagem padrão
+}, "Informe um CPF vÃ¡lido."); // Mensagem padrÃ£o
 
 jQuery.validator.addMethod("cnpj", function(value, element) {
 	cnpj = value.replace(/\D/g,"");
@@ -73,7 +73,7 @@ jQuery.validator.addMethod("cnpj", function(value, element) {
 	if ((x = b % 11) < 2) { a[13] = 0; } else { a[13] = 11-x; }
 	if ((cnpj.charAt(12) != a[12]) || (cnpj.charAt(13) != a[13]) || cnpj.match(expReg) ) if(jQuery(element).val().length==0) return true; else return false;
 	return true;
-}, "CNPJ inválido."); // Mensagem padrão
+}, "CNPJ invÃ¡lido."); // Mensagem padrÃ£o
 
 
 
@@ -87,5 +87,5 @@ jQuery.validator.addMethod(
       return false;
     }
   },
-  "Escolha uma opção"
+  "Escolha uma opÃ§Ã£o"
 );

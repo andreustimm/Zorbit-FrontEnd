@@ -28,6 +28,6 @@ jQuery.extend(jQuery.validator.messages, {
 	cep:  jQuery.validator.format("Por favor, digite corretamente o CEP"),
 });
 
-jQuery.validator.addMethod("datePTBR", function(value) { 
+jQuery.validator.addMethod("dateBR", function(value) { 
   return this.optional(element) || /^\d\d?\/\d\d?\/\d\d\d?\d?$/.test(value); 
 }, "Por favor, forne&ccedil;a uma data v&aacute;lida.");
