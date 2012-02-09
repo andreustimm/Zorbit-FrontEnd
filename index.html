@@ -1,323 +1,323 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Validação de Formulários</title>
-	<!--<link rel="stylesheet" href="http://ww2.telecontrol.com.br/mlg/consultas.css" />-->
-	<link rel="stylesheet" href="ckeditor/skins/kama/templates.css" />
-	<link rel="stylesheet" href="css/form.css" />
-	<link rel="stylesheet" href="css/slider.css" />
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
-	<link rel="stylesheet" href="js/jscalendar/skins/Tiger/theme.css" />
+    <meta charset="UTF-8">
+    <title>Validação de Formulários</title>
+    <!--<link rel="stylesheet" href="http://ww2.telecontrol.com.br/mlg/consultas.css" />-->
+    <link rel="stylesheet" href="ckeditor/skins/kama/templates.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/slider.css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
+    <link rel="stylesheet" href="js/jscalendar/skins/Tiger/theme.css" />
 
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script TYPE='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>
-	<script type="text/javascript" src="js/jquery.maskedinput-1.3.min.js"></script>
-	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="js/jquery.formrestrict.js"></script>
-	<script type="text/javascript" src="js/jquery.alphanumeric.js"></script>
-	<script type="text/javascript" src="js/mask.messages_ptbr.js"></script>
-	<script type="text/javascript" src="js/br.validate.extend.js"></script>
-	<script type="text/javascript" src="js/slider.js"></script>
-	<script type="text/javascript" src="jscolor/jscolor.js"></script>
-	<script type="text/javascript" src="js/jscalendar/calendar.js"></script>
-	<script type="text/javascript" src="js/jscalendar/lang/calendar-es.js"></script>
-	<script type="text/javascript" src="js/jscalendar/calendar-setup.js"></script>
-	<!-- or http://html5shim.googlecode.com/svn/trunk/html5.js -->
-	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" src="ckeditor/skins/kama/skin.js"></script>
-	<script type="text/javascript">
-	// Determina se o navegador tem suporte para input type='range'
-	var rangeNotSupported;
-	var i = document.createElement("input");
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script TYPE='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>
+    <script type="text/javascript" src="js/jquery.maskedinput-1.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/jquery.formrestrict.js"></script>
+    <script type="text/javascript" src="js/jquery.alphanumeric.js"></script>
+    <script type="text/javascript" src="js/mask.messages_ptbr.js"></script>
+    <script type="text/javascript" src="js/br.validate.extend.js"></script>
+    <script type="text/javascript" src="js/slider.js"></script>
+    <script type="text/javascript" src="jscolor/jscolor.js"></script>
+    <script type="text/javascript" src="js/jscalendar/calendar.js"></script>
+    <script type="text/javascript" src="js/jscalendar/lang/calendar-es.js"></script>
+    <script type="text/javascript" src="js/jscalendar/calendar-setup.js"></script>
+    <!-- or http://html5shim.googlecode.com/svn/trunk/html5.js -->
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="ckeditor/skins/kama/skin.js"></script>
+    <script type="text/javascript">
+    // Determina se o navegador tem suporte para input type='range'
+    var rangeNotSupported;
+    var i = document.createElement("input");
 
-	i.setAttribute("type", "range");
-	rangeNotSupported = (i.type === "text");
-	delete i;
+    i.setAttribute("type", "range");
+    rangeNotSupported = (i.type === "text");
+    delete i;
 
-	$(function() {
+    $(function() {
 
-		Calendar.setup({
-		  inputField  : "data", 			// ID of the input field
-		  ifFormat    : "%d-%m-%Y",    		// the date format
-		});
-		Calendar.setup({
-		  inputField  : "diaehora",			// ID of the input field
-		  showsTime   : true,
-		  ifFormat    : "%d-%m-%Y %H:%M",  	// the date format
-		});
+    	Calendar.setup({
+    	  inputField  : "data",				// ID of the input field
+    	  ifFormat    : "%d/%m/%Y",			// the date format
+    	});
+    	Calendar.setup({
+    	  inputField  : "diaehora",			// ID of the input field
+    	  showsTime   : true,
+    	  ifFormat    : "%d/%m/%Y %H:%M",	// the date format
+    	});
 
-		var calendar = Calendar(1, null);
+    	var calendar = Calendar(1, null);
 
-		$.datepicker.setDefaults($.datepicker.regional['br']);
-		$.datepicker.setDefaults({
-			dateFormat:			'dd-mm-yy',
-			showMonthAfterYear:	false,
-			changeMonth:		true,
-			constrainInput:		true,
-			maxDate:            '+0'
-		});
+    	$.datepicker.setDefaults($.datepicker.regional['br']);
+    	$.datepicker.setDefaults({
+    		dateFormat:			'dd/mm/yy',
+    		showMonthAfterYear:	false,
+    		changeMonth:		true,
+    		constrainInput:		true,
+    		maxDate:            '+0'
+    	});
 
-		$('#tabs').tabs();
+    	$('#tabs').tabs();
 
-		// Adiciona alguns 'extras' ao maskedinput: 0 núm opcional, A letras "especiais" (não todas), H cractere hexadecimal
-		$.mask.definitions['0']='[0-9]?';
-		$.mask.definitions['A']='[A-Za-záéíóúÁÉÍÓÚàèòùïüãõñÀÈÒÙÏÜÃÕÑ]?';
-		$.mask.definitions['H']='[A-F0-9]';
+    	// Adiciona alguns 'extras' ao maskedinput: 0 núm opcional, A letras "especiais" (não todas), H cractere hexadecimal
+    	$.mask.definitions['0']='[0-9]?';
+    	$.mask.definitions['A']='[A-Za-záéíóúÁÉÍÓÚàèòùïüãõñÀÈÒÙÏÜÃÕÑ]?';
+    	$.mask.definitions['H']='[A-F0-9]';
 
-		$('form[name=exemplo]').validate({
-									rules: {
-										cnpj: 'cnpj',
-										cpf:  'cpf',
-										email: {
-											required: true,
-											email: true
-											},
+    	$('form[name=exemplo]').validate({
+    								rules: {
+    									cnpj: 'cnpj',
+    									cpf:  'cpf',
+    									email: {
+    										required: true,
+    										email: true
+    										},
 
-									}
-								});
-		$('input.fone').mask("(99) 9999-9999",{placeholder:" "})
-				   .blur(function () {
-						$('input[name=cep]').focus();
-				   });
-		$('input[name=numero]').blur(function () {
-			if ($('input[name=cep]').val().length == 9) $('input[name=cnpj]').focus();
-			});
-		$('input[type=color],input.color').mask('#HHHHHH');
-		$('input[type=date],input[rel=date]').mask("99/99/9999");
-		$('input[type=time]').mask("99:99");
-		$('input[type^=datetime]').mask("99-99-9999 99:99")
-			.focus(function() {
-				var meuID = $(this).attr('id');
-				Calendar.setup({
-				  inputField  : meuID,				// ID of the input field
-				  showsTime   : true,
-				  ifFormat    : "%d-%m-%Y %H:%M",   // the date format
-				});
-		});
-		$('input[name=cep]').mask("99999-999",{placeholder:" "});
-		$('input[name=estado]').mask("aa",{placeholder:" "})
-							   .css('text-transform','uppercase')
-							   .blur(function() {$(this).val($this-val().toLocaleUpperCase());});
-		$('input[name=cpf]').mask("999.999.999-99",{placeholder:" "});
-		$('input[name=cnpj]').mask("99.999.999/9999-99",{placeholder:" "});
-		$('input[name*=valor]').mask("R$ 0.009,99");
-		// Se quiser limitar o tamanho máximo, utilizar o 'mask', no segundo caso, devidamente modificado.
-		// Para setar um mínimo obrigatório de caracteres, colocar o '?' no lugar apropriado. Neste caso,
-		// o login tem um mínimo de 5 caracteres e o 'nome completo' apenas 1.
-		/*$('#login').mask("aaaaa?aaaaaaaaaa", {placeholder:" "});
-		$('#nome_completo').mask("A?AAAAAAAAAAAAAAAAAAA", {placeholder:" "});*/
-		//Se for apenas limitar os caracteres e não o comprimento mínimo e máximo, então utilizar o 'alpha':
-		$('#login').alpha({allow: '_.', restraints:{nocaps:true}});
-		$('#nome_completo').alpha({allow: 'áéíóúÁÉÍÓÚàèòùïüãõêñÀÈÒÙÏÜÃÕÊÑ '});
+    								}
+    							});
+    	$('input.fone').mask("(99) 9999-9999",{placeholder:" "})
+    			   .blur(function () {
+    					$('input[name=cep]').focus();
+    			   });
+    	$('input[name=numero]').blur(function () {
+    		if ($('input[name=cep]').val().length == 9) $('input[name=cnpj]').focus();
+    		});
+    	$('input[type=color],input.color').mask('#HHHHHH');
+    	$('input[type=date],input[rel=date]').mask("99/99/9999");
+    	$('input[type=time]').mask("99:99");
+    	$('input[type^=datetime]').mask("99/99/9999 99:99")
+    		.focus(function() {
+    			var meuID = $(this).attr('id');
+    			Calendar.setup({
+    			  inputField  : meuID,				// ID of the input field
+    			  showsTime   : true,
+    			  ifFormat    : "%d/%m/%Y %H:%M",   // the date format
+    			});
+    	});
+    	$('input[name=cep]').mask("99999-999",{placeholder:" "});
+    	$('input[name=estado]').mask("aa",{placeholder:" "})
+    						   .css('text-transform','uppercase')
+    						   .blur(function() {$(this).val($this-val().toLocaleUpperCase());});
+    	$('input[name=cpf]').mask("999.999.999-99",{placeholder:" "});
+    	$('input[name=cnpj]').mask("99.999.999/9999-99",{placeholder:" "});
+    	$('input[name*=valor]').mask("R$ 0.009,99");
+    	// Se quiser limitar o tamanho máximo, utilizar o 'mask', no segundo caso, devidamente modificado.
+    	// Para setar um mínimo obrigatório de caracteres, colocar o '?' no lugar apropriado. Neste caso,
+    	// o login tem um mínimo de 5 caracteres e o 'nome completo' apenas 1.
+    	/*$('#login').mask("aaaaa?aaaaaaaaaa", {placeholder:" "});
+    	$('#nome_completo').mask("A?AAAAAAAAAAAAAAAAAAA", {placeholder:" "});*/
+    	//Se for apenas limitar os caracteres e não o comprimento mínimo e máximo, então utilizar o 'alpha':
+    	$('#login').alpha({allow: '_.', restraints:{nocaps:true}});
+    	$('#nome_completo').alpha({allow: 'áéíóúÁÉÍÓÚàèòùïüãõêñÀÈÒÙÏÜÃÕÊÑ '});
 
-		$('input[type=password]').mask("******?*********", {placeholder:''});
-		//"99.999.999/9999-99" CNPJ
-		$('#trans').change(function() {
-			$('#opaque').text($(this).val());
-			$('#color').change();
-			});
-		$('#msg').dialog({autoOpen: false});
-		$('#color').change(function() {
-			var colorEl = document.getElementById('color'); //Precisa ser o DOM element
-			var cor = '#' + $(this).val();
+    	$('input[type=password]').mask("******?*********", {placeholder:''});
+    	//"99.999.999/9999-99" CNPJ
+    	$('#trans').change(function() {
+    		$('#opaque').text($(this).val());
+    		$('#color').change();
+    		});
+    	$('#msg').dialog({autoOpen: false});
+    	$('#color').change(function() {
+    		var colorEl = document.getElementById('color'); //Precisa ser o DOM element
+    		var cor = '#' + $(this).val();
 
-			var r =	colorEl.color.rgb[0]*100;
-			var g =	colorEl.color.rgb[1]*100;
-			var b = colorEl.color.rgb[2]*100;
+    		var r =	colorEl.color.rgb[0]*100;
+    		var g =	colorEl.color.rgb[1]*100;
+    		var b = colorEl.color.rgb[2]*100;
 
-			var o = $('#trans').val();
-			o = (o.length < 2) ? '0'+o : o;
+    		var o = $('#trans').val();
+    		o = (o.length < 2) ? '0'+o : o;
 
-			//console.log("Transparência: " + o);
+    		//console.log("Transparência: " + o);
 
-			if (o != '100') {
-				cor = 'rgba(' + r +'%,'+ g +'%,'+ b +'%, 0.'+ o + ')';
-			}
+    		if (o != '100') {
+    			cor = 'rgba(' + r +'%,'+ g +'%,'+ b +'%, 0.'+ o + ')';
+    		}
 
-			//console.log(cor);
-			$('body').css('background-color', cor);
-		});
-	});
-	</script>
-	<style type="text/css">
-	body {
-		background-image: url();
-		font-size:14px!important;
-	}
-	label {
-		display: block;
-		font-size: 0.8em;
-		color: #003;
-		font-weight: bold;
-	}
-	input[type=radio]+label,
-	input[type=checkbox]+label
-		{display:inline}
-	input[type=time] {
-		width: 4em;
-		text-align: center;
-	}
-	fieldset.col p {
-		float:left;
-		clear:none;
-		display:inline-block;
-		width:45%;
-		margin: auto 2%;
-		vertical-align: top;
-	}
-	</style>
+    		//console.log(cor);
+    		$('body').css('background-color', cor);
+    	});
+    });
+    </script>
+    <style type="text/css">
+    body {
+    	background-image: url();
+    	font-size:14px!important;
+    }
+    label {
+    	display: block;
+    	font-size: 0.8em;
+    	color: #003;
+    	font-weight: bold;
+    }
+    input[type=radio]+label,
+    input[type=checkbox]+label
+    	{display:inline}
+    input[type=time] {
+    	width: 4em;
+    	text-align: center;
+    }
+    fieldset.col p {
+    	float:left;
+    	clear:none;
+    	display:inline-block;
+    	width:45%;
+    	margin: auto 2%;
+    	vertical-align: top;
+    }
+    </style>
 </head>
 <body>
-	<h1>HTML5 Forms</h1>
-	<form action="" name='exemplo' for="trans">
-	<div id="tabs">
-		<ul>
-			<li><a href="#especiais">Campos Especiais</a></li>
-			<li><a href="#datas">Data e Hora</a></li>
-			<li><a href="#numericos">Campos Numéricos</a></li>
-			<li><a href="#textos">Campos de Texto</a></li>
-		</ul>
-		<div id="especiais">
-			<fieldset class='col'>
-				<legend>Campos Especiais</legend>
-				<label for="color">Cor do fundo</label>
-				<input type="color" value class='color' required id='color' style='width:5em' />
-				<label for="trans" style='display:inline-block'>Opacidade:</label>
-				<input type="range" id="trans" value='85' min='50' max='100' required step='5' />
-				<span id='opaque'>85</span> %
-				<br />
-				<p>
-				<label for="tipoCel">Tipo de Celular</label>
-				<select id="tipoCel" multiple name="celType" >
-					<option value="">iPhone</option>
-					<option value="">BalckBerry</option>
-					<option value="">Galaxy 5s</option>
-					<option value="">Galaxy Tablet</option>
-					<option value="">iPad</option>
-					<option value="">Outros</option>
-				</select>
-				</p>
-				<p>
-					<fieldset class='col' style='width:45%!important'>
-						<legend>Efeitos</legend>
-						<input id="chk1" name="efeito[]" type="checkbox" />
-							<label for="chk1">Preto e Branco</label>
-						<input id="chk2" name="efeito[]" type="checkbox" />
-							<label for="chk2">Posterizar</label>
-						<input id="chk3" name="efeito[]" type="checkbox" />
-							<label for="chk3">Espelho</label>
-					</fieldset>
-					<fieldset class='col' style='width:45%!important'>
-						<legend>Formato de Saída</legend>
-						<input id="r1" name="formato" type="radio" />
-							<label for="r1">JPeG</label>
-						<input id="r2" name="formato" type="radio" />
-							<label for="r2">PNG</label>
-						<input id="r3" name="formato" type="radio" />
-							<label for="r3">PDF</label>
-					</fieldset>
-					<br />
-					<label for="arquivo">Enviar imagem</label>
-					<input id="arquivo" name="arquivos[]" accept='jpg,jpeg,png,pdf' type="file" multiple='multiple' />
-				</p>
-			</fieldset>
-		</div>
-		<br />
-		<br />
-		<div id="datas">
-			<fieldset class='col'>
-				<legend>Campos de Data ou hora</legend>
-				<p>
-					<label for="mes_sel">Selecione o Mês</label>
-					<select id="mes_sel" name="mes">
-						<option value="">Mês</option>
-						<option value="1">Jan</option>
-						<option value="2">Fev</option>
-						<option value="3">Mar</option>
-						<option value="4">Abr</option>
-						<option value="5">Mai</option>
-						<option value="6">Jun</option>
-						<option value="7">Jul</option>
-						<option value="8">Ago</option>
-						<option value="9">Set</option>
-						<option value="10">Out</option>
-						<option value="11">Nov</option>
-						<option value="12">Dez</option>
-					</select>
-					<label for="diaehora">Hora de agendamento</label>
-					<input id="diaehora" class='datetime' type="datetime-local"
-						 name='agendamento' required='required' style="width:150px!important" />
-				</p>
-				<p>
-				<label for="data">Data</label>
-				<input type="date" id="data" name='data' class='dateBR required' style="width:120px!important" />
-				<label for="duracao">Duração</label>
-				<input id="duracao" name='duracao' type="time" required pattern='[0-2][0-9]:[0-5][0-9]' style="width:50px!important" />
-				</p>
-			</fieldset>
-		</div>
-		<br />
-		<br />
-		<div id="numericos">
-			<fieldset class='col'>
-				<legend>Campos Numéricos</legend>
-				<p>
-					<label for="cep">CEP</label>
-					<input type="text" id="cep" name="cep" placeholder="Código de Endereçamento Postal" />
-					<label for="fone">Telefone BR</label>
-					<input type="text" id='fone' placeholder='Telefone' class='fone' name='fone' />
-				</p>
-				<p>
-					<label for="cpf">CPF</label>
-					<input type="text" id='cpf' class='cpf' name='cpf' required placeholder='CPF do cliente' />
-					<label for="CNPJ">CNPJ</label>
-					<input type="text" class="CNPJ" name='cnpj' id='cnpj' placeholder="Digite o CNPJ do Provedor" />
-				</p>
-				<label for="valor">Valor Total</label>
-				<input type="text" id="valor" name="valor" />
-				<label for="peso">Peso</label>
-				<input type="number" class='numeric' NAME='peso' align='right' id='peso' pattern="\d{1,3}i[.,]\d{1,3}" />
-			</fieldset>
-		</div>
-		<br />
-		<br />
-		<div id="textos">
-			<fieldset style="width:900px" class="col">
-				<legend>Campos de texto</legend>
-				<p>
-					<label for="nome_completo">Nome Completo</label>
-					<input type="text" id='nome_completo' placeholder='Nome Completo' pattern='\w+\s\w+' />
-					<label for="login" title="Apenas letras, sem acentos nem números">Login</label>
-					<input type="text" title="Apenas letras, sem acentos nem números"
-							 id='login' placeholder='usuario' pattern="[A-Za-z]+" />
-					<label for="pass">Digite uma Senha</label>
-					<input id="pass"  name="password" type="password" placeholder="Senha, máx 15 caracteres" />
-					<label for="pass2">Confirmar Senha</label>
-					<input id="pass2" name="passwrd2" type="password" placeholder="Confirme sua senha" />
-				</p>
-				<label for="texto">Texto livre</label>
-				<input type="text" id='texto' />
-				<label for="maisTexto">Texto Normal</label>
-				<textarea id="maisTexto" name="ta_1" rows="10" cols="30"></textarea>
-				<div>
-					<label for="html">Editor Completo</label>
-					<textarea id="html" name="htmlText" rows="10" class="ckeditor" cols="30"></textarea>
-				</div>
-			</fieldset>
-		</div>
-	</div>
-	<br />
-	<br />
-	<fieldset class='col'>
-		<p><button class='gStyle'>Enviar</button></p>
-		<p><button class='gStyle' type="reset">Redefinir</button></p>
-	</fieldset>
-	</form>
-	<div id="msg"></div>
-	<script type="text/javascript" src="js/EventHelpers.js"></script>
-	<script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
-	<script type="text/javascript" src="js/webforms_2.js"></script>
-	<script type="text/javascript" src="js/html5Widgets.js"></script>
+    <h1>HTML5 Forms</h1>
+    <form action="" name='exemplo' for="trans">
+    <div id="tabs">
+    	<ul>
+    		<li><a href="#especiais">Campos Especiais</a></li>
+    		<li><a href="#datas">Data e Hora</a></li>
+    		<li><a href="#numericos">Campos Numéricos</a></li>
+    		<li><a href="#textos">Campos de Texto</a></li>
+    	</ul>
+    	<div id="especiais">
+    		<fieldset class='col'>
+    			<legend>Campos Especiais</legend>
+    			<label for="color">Cor do fundo</label>
+    			<input type="color" value class='color' required id='color' style='width:5em' />
+    			<label for="trans" style='display:inline-block'>Opacidade:</label>
+    			<input type="range" id="trans" value='85' min='50' max='100' required step='5' />
+    			<span id='opaque'>85</span> %
+    			<br />
+    			<p>
+    			<label for="tipoCel">Tipo de Celular</label>
+    			<select id="tipoCel" multiple name="celType" >
+    				<option value="">iPhone</option>
+    				<option value="">BalckBerry</option>
+    				<option value="">Galaxy 5s</option>
+    				<option value="">Galaxy Tablet</option>
+    				<option value="">iPad</option>
+    				<option value="">Outros</option>
+    			</select>
+    			</p>
+    			<p>
+    				<fieldset class='col' style='width:45%!important'>
+    					<legend>Efeitos</legend>
+    					<input id="chk1" name="efeito[]" type="checkbox" />
+    						<label for="chk1">Preto e Branco</label>
+    					<input id="chk2" name="efeito[]" type="checkbox" />
+    						<label for="chk2">Posterizar</label>
+    					<input id="chk3" name="efeito[]" type="checkbox" />
+    						<label for="chk3">Espelho</label>
+    				</fieldset>
+    				<fieldset class='col' style='width:45%!important'>
+    					<legend>Formato de Saída</legend>
+    					<input id="r1" name="formato" type="radio" />
+    						<label for="r1">JPeG</label>
+    					<input id="r2" name="formato" type="radio" />
+    						<label for="r2">PNG</label>
+    					<input id="r3" name="formato" type="radio" />
+    						<label for="r3">PDF</label>
+    				</fieldset>
+    				<br />
+    				<label for="arquivo">Enviar imagem</label>
+    				<input id="arquivo" name="arquivos[]" accept='jpg,jpeg,png,pdf' type="file" multiple='multiple' />
+    			</p>
+    		</fieldset>
+    	</div>
+    	<br />
+    	<br />
+    	<div id="datas">
+    		<fieldset class='col'>
+    			<legend>Campos de Data ou hora</legend>
+    			<p>
+    				<label for="mes_sel">Selecione o Mês</label>
+    				<select id="mes_sel" name="mes">
+    					<option value="">Mês</option>
+    					<option value="1">Jan</option>
+    					<option value="2">Fev</option>
+    					<option value="3">Mar</option>
+    					<option value="4">Abr</option>
+    					<option value="5">Mai</option>
+    					<option value="6">Jun</option>
+    					<option value="7">Jul</option>
+    					<option value="8">Ago</option>
+    					<option value="9">Set</option>
+    					<option value="10">Out</option>
+    					<option value="11">Nov</option>
+    					<option value="12">Dez</option>
+    				</select>
+    				<label for="diaehora">Hora de agendamento</label>
+    				<input id="diaehora" class='datetime' type="datetime-local"
+    					 name='agendamento' required='required' style="width:150px!important" />
+    			</p>
+    			<p>
+    			<label for="data">Data</label>
+    			<input type="date" id="data" name='data' class='dateBR required' style="width:120px!important" />
+    			<label for="duracao">Duração</label>
+    			<input id="duracao" name='duracao' type="time" required pattern='[0-2][0-9]:[0-5][0-9]' style="width:50px!important" />
+    			</p>
+    		</fieldset>
+    	</div>
+    	<br />
+    	<br />
+    	<div id="numericos">
+    		<fieldset class='col'>
+    			<legend>Campos Numéricos</legend>
+    			<p>
+    				<label for="cep">CEP</label>
+    				<input type="text" id="cep" name="cep" placeholder="Código de Endereçamento Postal" />
+    				<label for="fone">Telefone BR</label>
+    				<input type="text" id='fone' placeholder='Telefone' class='fone' name='fone' />
+    			</p>
+    			<p>
+    				<label for="cpf">CPF</label>
+    				<input type="text" id='cpf' class='cpf' name='cpf' required placeholder='CPF do cliente' />
+    				<label for="CNPJ">CNPJ</label>
+    				<input type="text" class="CNPJ" name='cnpj' id='cnpj' placeholder="Digite o CNPJ do Provedor" />
+    			</p>
+    			<label for="valor">Valor Total</label>
+    			<input type="text" id="valor" name="valor" />
+    			<label for="peso">Peso</label>
+    			<input type="number" class='numeric' NAME='peso' align='right' id='peso' pattern="\d{1,3}i[.,]\d{1,3}" />
+    		</fieldset>
+    	</div>
+    	<br />
+    	<br />
+    	<div id="textos">
+    		<fieldset style="width:900px" class="col">
+    			<legend>Campos de texto</legend>
+    			<p>
+    				<label for="nome_completo">Nome Completo</label>
+    				<input type="text" id='nome_completo' placeholder='Nome Completo' pattern='\w+\s\w+' />
+    				<label for="login" title="Apenas letras, sem acentos nem números">Login</label>
+    				<input type="text" title="Apenas letras, sem acentos nem números"
+    						 id='login' placeholder='usuario' pattern="[A-Za-z]+" />
+    				<label for="pass">Digite uma Senha</label>
+    				<input id="pass"  name="password" type="password" placeholder="Senha, máx 15 caracteres" />
+    				<label for="pass2">Confirmar Senha</label>
+    				<input id="pass2" name="passwrd2" type="password" placeholder="Confirme sua senha" />
+    			</p>
+    			<label for="texto">Texto livre</label>
+    			<input type="text" id='texto' />
+    			<label for="maisTexto">Texto Normal</label>
+    			<textarea id="maisTexto" name="ta_1" rows="10" cols="30"></textarea>
+    			<div>
+    				<label for="html">Editor Completo</label>
+    				<textarea id="html" name="htmlText" rows="10" class="ckeditor" cols="30"></textarea>
+    			</div>
+    		</fieldset>
+    	</div>
+    </div>
+    <br />
+    <br />
+    <fieldset class='col'>
+    	<p><button class='gStyle'>Enviar</button></p>
+    	<p><button class='gStyle' type="reset">Redefinir</button></p>
+    </fieldset>
+    </form>
+    <div id="msg"></div>
+    <script type="text/javascript" src="js/EventHelpers.js"></script>
+    <script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
+    <script type="text/javascript" src="js/webforms_2.js"></script>
+    <script type="text/javascript" src="js/html5Widgets.js"></script>
 </body>
 </html>
