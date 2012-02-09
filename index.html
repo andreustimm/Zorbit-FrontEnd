@@ -116,7 +116,8 @@
 		$('#trans').change(function() {
 			$('#opaque').text($(this).val());
 			$('#color').change();
-		});
+			});
+		$('#msg').dialog({autoOpen: false});
 		$('#color').change(function() {
 			var colorEl = document.getElementById('color'); //Precisa ser o DOM element
 			var cor = '#' + $(this).val();
@@ -313,6 +314,7 @@
 		<p><button class='gStyle' type="reset">Redefinir</button></p>
 	</fieldset>
 	</form>
+	<div id="msg"></div>
 	<script type="text/javascript" src="js/EventHelpers.js"></script>
 	<script type="text/javascript" src="js/modernizr-1.5.min.js"></script>
 	<script type="text/javascript" src="js/webforms_2.js"></script>
