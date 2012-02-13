@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="ckeditor/skins/kama/templates.css" />
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/flick/jquery-ui.css" />
-    <link rel="stylesheet" href="js/jscalendar/skins/Tiger/theme.css" />
+    <link rel="stylesheet" href="js/jscalendar/skins/tiger/theme.css" />
 	<style type="text/css">
 		body {
 			background-image: url();
@@ -165,7 +165,7 @@ Este seria o cabeçalho da tela... HTML5.
 					<label for="valor">Valor Total</label>
 					<input type="text" id="valor" name="valor" />
 					<label for="peso">Peso</label>
-					<input type="number" class='numeric' NAME='peso' align='right' id='peso' pattern="\d{1,3}i[.,]\d{1,3}" />
+					<input type="number" class='numeric' name='peso' align='right' id='peso' pattern="\d{1,3}[.,]\d{1,3}" />
 				</fieldset>
 			</div>
 			<br />
@@ -183,6 +183,10 @@ Este seria o cabeçalho da tela... HTML5.
 						<input id="pass"  name="password" type="password" class='required' placeholder="Senha, máx 15 caracteres" />
 						<label for="pass2">Confirmar Senha</label>
 						<input id="pass2" name="passwrd2" type="password" placeholder="Confirme sua senha" />
+						<label for="email">Email Particular</label>
+						<input id="email" name="email_pessoal" type="email" />
+						<label for="email">Email Comercial</label>
+						<input id="email" name="email_servico" type="email" />
 					</p>
 					<label for="texto">Texto livre</label>
 					<input type="text" id='texto' />
