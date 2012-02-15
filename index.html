@@ -62,14 +62,14 @@
                 <div id="especiais">
                     <fieldset class='col'>
                         <legend>Campos Especiais</legend>
-                        <label for="color">Cor do fundo</label>
-                        <input type="color" value class='color' required id='color' style='width:5em' />
-                        <label for="trans" style='display:inline-block'>Opacidade:</label>
-                        <input type="range" id="trans" value='85' min='50' max='100' required step='5' />
-                        <span id='opaque'>85</span> %
-                        <br />
-                        <br />
                         <p>
+							<label for="color">Cor do fundo</label>
+							<input type="text" value class='color' required id='color' style='width:5em' />
+							<!-- <input type="color" value class='color' required id='color' style='width:5em' /> -->
+							<label for="trans" style='display:inline-block'>Opacidade:</label>
+							<input type="range" id="trans" value='85' min='50' max='100' required step='5' />
+							<span id='opaque'>85</span> %
+							<br />
 							<label for="tipoCel">Dispositivos</label>
 							<select id="tipoCel" multiple name="celType" >
 								<optgroup label="Celular">
@@ -83,6 +83,22 @@
 									<option value="">iPad</option>
 									<option value="">Android</option>
 									<option value="">Outros</option>
+								</optgroup>
+							</select>
+							<br />
+							<br />
+							<label for="Frutas" style="display:inline">Frutas</label>
+							<select id="Frutas" name="frutas">
+								<option value="">Selecione...</option>
+								<optgroup label='Cítricos'>
+									<option value="orange">Laranja</option>
+									<option value="lemon">Limão</option>
+									<option value="pineapple">Abacaxi</option>
+								</optgroup>
+								<optgroup label='Tropicais'>
+									<option value="kiwi">Kiwi</option>
+									<option value="mango">Manga</option>
+									<option value="banana">Banana</option>
 								</optgroup>
 							</select>
                         </p>
@@ -207,6 +223,7 @@
     <footer>
         Fim da tela (rodapé).
     </footer>
+	<div id="msg"></div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
@@ -303,7 +320,14 @@
                     });
             });
 
-            $('input[name=cep]').mask("99999-999",{placeholder:" "});
+			$('input[name=cep]').mask("99999-999", {
+					placeholder:" ",
+					completed: function() {
+							var cep = $(this).val();
+							$('#msg').html("Aqui devolve os dados do CEP " + cep + ".")
+									 .dialog('show');
+				}
+			});
             $('input[name=estado]').mask("aa",{placeholder:" "})
                                    .css('text-transform','uppercase')
                                    .blur(function() {$(this).val($this-val().toLocaleUpperCase());});
