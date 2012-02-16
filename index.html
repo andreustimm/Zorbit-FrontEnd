@@ -62,16 +62,35 @@
                 <div id="especiais">
                     <fieldset class='col'>
                         <legend>Campos Especiais</legend>
-                        <label for="color">Cor do fundo</label>
-                        <input type="color" value class='color' required id='color' style='width:5em' />
-                        <label for="trans" style='display:inline-block'>Opacidade:</label>
-                        <input type="range" id="trans" value='85' min='50' max='100' required step='5' />
-                        <span id='opaque'>85</span> %
-                        <br />
-                        <br />
+						<p>
+							<label for="color">Cor do fundo</label>
+							<input type="text" value class='color' required id='color' style='width:5em' />
+							<!-- <input type="color" value class='color' required id='color' style='width:5em' /> -->
+							<label for="trans" style='display:inline-block'>Opacidade:</label>
+							<input type="range" id="trans" value='85' min='50' max='100' required step='5' />
+							<span id='opaque'>85</span> %
+                            <span>Efeitos</span>
+							<input id="chk1" name="efeito[]" type="checkbox" />
+							<label for="chk1">Preto e Branco</label>
+							<input id="chk2" name="efeito[]" type="checkbox" />
+							<label for="chk2">Posterizar</label>
+							<input id="chk3" name="efeito[]" type="checkbox" />
+							<label for="chk3">Espelho</label>
+                        </p>
+						<p>
+							<span>Formato de Saída</span>
+							<input id="r1" name="formato" type="radio" />
+							<label for="r1">JPeG</label>
+							<input id="r2" name="formato" type="radio" />
+							<label for="r2">PNG</label>
+							<input id="r3" name="formato" type="radio" />
+							<label for="r3">PDF</label>
+                            <label for="arquivo">Enviar imagem</label>
+                            <input id="arquivo" name="arquivos[]" accept='jpg,jpeg,png,pdf' type="file" multiple='multiple' />
+						</P>
                         <p>
                             <label for="tipoCel">Dispositivos</label>
-                            <select id="tipoCel" multiple name="celType" >
+                            <select id="tipoCel" multiple name="celType">
                                 <optgroup label="Celular">
                                     <option value="">iPhone</option>
                                     <option value="">BalckBerry</option>
@@ -85,30 +104,20 @@
                                     <option value="">Outros</option>
                                 </optgroup>
                             </select>
-                        </p>
-                        <p>
-                            <fieldset class='col' style='width:45%!important'>
-                                <legend>Efeitos</legend>
-                                <input id="chk1" name="efeito[]" type="checkbox" />
-                                <label for="chk1">Preto e Branco</label>
-                                <input id="chk2" name="efeito[]" type="checkbox" />
-                                <label for="chk2">Posterizar</label>
-                                <input id="chk3" name="efeito[]" type="checkbox" />
-                                <label for="chk3">Espelho</label>
-                            </fieldset>
-                            <br />
-                            <fieldset class='col' style='width:45%!important'>
-                                <legend>Formato de Saída</legend>
-                                <input id="r1" name="formato" type="radio" />
-                                <label for="r1">JPeG</label>
-                                <input id="r2" name="formato" type="radio" />
-                                <label for="r2">PNG</label>
-                                <input id="r3" name="formato" type="radio" />
-                                <label for="r3">PDF</label>
-                            </fieldset>
-                            <br />
-                            <label for="arquivo">Enviar imagem</label>
-                            <input id="arquivo" name="arquivos[]" accept='jpg,jpeg,png,pdf' type="file" multiple='multiple' />
+                            <label for="Frutas" style="display:inline">Frutas</label>
+                            <select id="Frutas" name="frutas">
+                                <option value="">Selecione...</option>
+                                <optgroup label='Cítricos'>
+                                    <option value="orange">Laranja</option>
+                                    <option value="lemon">Limão</option>
+                                    <option value="pineapple">Abacaxi</option>
+                                </optgroup>
+                                <optgroup label='Tropicais'>
+                                    <option value="kiwi">Kiwi</option>
+                                    <option value="mango">Manga</option>
+                                    <option value="banana">Banana</option>
+                                </optgroup>
+                            </select>
                         </p>
                     </fieldset>
                 </div>
@@ -180,12 +189,12 @@
                             <label for="pass2">Confirmar Senha</label>
                             <input id="pass2" name="passwrd2" type="password" placeholder="Confirme sua senha" />
                         </p>
-						<p>
+                        <p>
                             <label for="email">Email Particular</label>
                             <input id="email" name="email_pessoal" type="email" />
                             <label for="email">Email Comercial</label>
                             <input id="email" name="email_servico" type="email" />
-						</p>
+                        </p>
                         <p>
                             <label for="maisTexto">Texto Normal</label>
                             <textarea id="maisTexto" name="ta_1" rows="10" cols="30"></textarea>
@@ -209,6 +218,7 @@
     <footer>
         Fim da tela (rodapé).
     </footer>
+    <div id="msg"></div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
@@ -305,7 +315,14 @@
                     });
             });
 
-            $('input[name=cep]').mask("99999-999",{placeholder:" "});
+            $('input[name=cep]').mask("99999-999", {
+                    placeholder:" ",
+                    completed: function() {
+                            var cep = $(this).val();
+                            $('#msg').html("Aqui devolve os dados do CEP " + cep + ".")
+                                     .dialog('show');
+                }
+            });
             $('input[name=estado]').mask("aa",{placeholder:" "})
                                    .css('text-transform','uppercase')
                                    .blur(function() {$(this).val($this-val().toLocaleUpperCase());});

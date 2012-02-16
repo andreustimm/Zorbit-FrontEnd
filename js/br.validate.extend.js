@@ -2,7 +2,7 @@
 jQuery.validator.addMethod(
   "dateBR",
   function(value, element) {
-	var val_exp=value.split(/[/-.]]/);
+	var val_exp=value.split(/[\/.-]/);
   	if(val_exp.length==3){
       var ano=val_exp[2];
       var mes=val_exp[1];
