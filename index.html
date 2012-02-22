@@ -35,6 +35,7 @@
             width: 4em;
             text-align: center;
         }
+        fieldset.col div,
         fieldset.col p {
             float:left;
             clear:none;
@@ -43,14 +44,17 @@
             margin: auto 2%;
             vertical-align: top;
         }
+		section[role=main] {
+			display:none
+		}
     </style>
     <script src="js/libs/modernizr.h5bp.custom.js"></script>
 </head>
 <body>
     <header>
-        Este seria o cabeçalho da tela... HTML5.
+        <h1>Este seria o cabeçalho da tela... HTML5.</h1>
     </header>
-    <section role="main">
+    <section id="tabsForm" role="main">
         <form action="" name='exemplo' for="trans">
             <div id="tabs">
                 <ul>
@@ -62,33 +66,34 @@
                 <div id="especiais">
                     <fieldset class='col'>
                         <legend>Campos Especiais</legend>
-						<p>
+						<p style="height:180px;width:25%">
 							<label for="color">Cor do fundo</label>
 							<input type="text" value class='color' required id='color' style='width:5em' />
 							<!-- <input type="color" value class='color' required id='color' style='width:5em' /> -->
 							<label for="trans" style='display:inline-block'>Opacidade:</label>
 							<input type="range" id="trans" value='85' min='50' max='100' required step='5' />
 							<span id='opaque'>85</span> %
-                            <span>Efeitos</span>
-							<input id="chk1" name="efeito[]" type="checkbox" />
-							<label for="chk1">Preto e Branco</label>
-							<input id="chk2" name="efeito[]" type="checkbox" />
-							<label for="chk2">Posterizar</label>
-							<input id="chk3" name="efeito[]" type="checkbox" />
-							<label for="chk3">Espelho</label>
                         </p>
-						<p>
-							<span>Formato de Saída</span>
+						<p style="height:180px;width:38%">
+							<legend>Formato de Saída</legend>
 							<input id="r1" name="formato" type="radio" />
 							<label for="r1">JPeG</label>
 							<input id="r2" name="formato" type="radio" />
 							<label for="r2">PNG</label>
 							<input id="r3" name="formato" type="radio" />
 							<label for="r3">PDF</label>
-                            <label for="arquivo">Enviar imagem</label>
-                            <input id="arquivo" name="arquivos[]" accept='jpg,jpeg,png,pdf' type="file" multiple='multiple' />
+							<br />
+							<legend>Efeitos</legend>
+							<input id="chk1" name="efeito[]" type="checkbox" />
+							<label for="chk1">Preto e Branco</label>
+							<input id="chk2" name="efeito[]" type="checkbox" />
+							<label for="chk2">Posterizar</label>
+							<input id="chk3" name="efeito[]" type="checkbox" />
+							<label for="chk3">Espelho</label>
+                            <label for="arquivo">Enviar imagens</label>
+                            <input id="arquivo" name="arquivos[]" accept='jpg,jpeg,png,gif' type="file" multiple='multiple' />
 						</P>
-                        <p>
+                        <p style="height:180px;width:25%">
                             <label for="tipoCel">Dispositivos</label>
                             <select id="tipoCel" multiple name="celType">
                                 <optgroup label="Celular">
@@ -104,6 +109,8 @@
                                     <option value="">Outros</option>
                                 </optgroup>
                             </select>
+							<br />
+							<br />
                             <label for="Frutas" style="display:inline">Frutas</label>
                             <select id="Frutas" name="frutas">
                                 <option value="">Selecione...</option>
@@ -142,12 +149,14 @@
                                     <option value="12">Dez</option>
                                 </optgroup>
                             </select>
-                            <label for="diaehora">Hora de agendamento</label>
-                            <input id="diaehora" class='datetime' type="datetime-local" name='agendamento' required='required' style="width:150px!important" />
+							<label for="ano">Ano</label>
+							<input id="ano" name="ano" type="number" size="5" min="1970" max="2040" />
                         </p>
                         <p>
                             <label for="data">Data</label>
                             <input type="text" id="data" name='data' class='dateBR required' pattern="[0-3]\d\/[012]\d\/[12][019]\d{2}" style="width:120px!important" />
+                            <label for="diaehora">Hora de agendamento</label>
+                            <input id="diaehora" class='datetime' type="datetime-local" name='agendamento' required='required' style="width:150px!important" />
                             <label for="duracao">Duração</label>
                             <input id="duracao" name='duracao' type="time" required pattern='[0-2][0-9]:[0-5][0-9]' style="width:50px!important" />
                         </p>
@@ -194,6 +203,15 @@
                             <input id="email" name="email_pessoal" type="email" />
                             <label for="email">Email Comercial</label>
                             <input id="email" name="email_servico" type="email" />
+							<br />
+							<label for="fcbk">Seu FaceBook</label>
+							<input id="fcbk" type="url" name="fcbk" style="width:220px"
+							  pattern=".*facebook\.com\/\w+"
+							  placeholder="http://www.facebook.com/seuID" />
+							<br />
+							<label for="url">Seu Site</label>
+							<input id="url" name="site" type="url" style="width:220px"
+								placeholder="Seu espaço na web"/>
                         </p>
                         <p>
                             <label for="maisTexto">Texto Normal</label>
@@ -249,7 +267,6 @@
         delete i;
 
         $(function() {
-
             Calendar.setup({
               inputField  : "data",              // ID of the input field
               ifFormat    : "%d/%m/%Y",          // the date format
@@ -273,10 +290,10 @@
 
             $('#tabs').tabs();
 
-            // Adiciona alguns 'extras' ao maskedinput: 0 núm opcional, A letras "especiais" (não todas), H cractere hexadecimal
+            // Adiciona alguns 'extras' ao maskedinput: 0 núm opcional, A letras "especiais" (não todas), H caractere hexadecimal
             $.mask.definitions['0']='[0-9]?';
             $.mask.definitions['A']='[A-Za-záéíóúÁÉÍÓÚàèòùïüãõñÀÈÒÙÏÜÃÕÑ]?';
-            $.mask.definitions['H']='[A-F0-9]';
+            $.mask.definitions['H']='[A-Fa-f0-9]';
 
             $('form[name=exemplo]').validate({
                 rules: {
@@ -290,22 +307,20 @@
                 }
             });
 
-            $('input.fone').mask("(99) 9999-9999",{placeholder:" "})
-               .blur(function () {
-                    $('input[name=cep]').focus();
-               });
+            $('input.fone').mask("(99) 9999-9999",{placeholder:" "});
+
+			//Não bate com todos os telefones do mundo, mas quase...
+			$('input.foneInt').mask("+099 (099) 0999-9999",{placeholder:" "});
 
             $('input[name=numero]').blur(function () {
-
                 if ($('input[name=cep]').val().length == 9) $('input[name=cnpj]').focus();
-
             });
 
             $('input[type=color],input.color').mask('#HHHHHH');
             $('input[type=date],input[rel=date]').mask("99/99/9999");
             $('input[type=time]').mask("99:99");
 
-            $('input[type^=datetime]').mask("99/99/9999 99:99")
+            $('input[rel=datetime],input[type^=datetime]').mask("99/99/9999 99:99")
                 .focus(function() {
                     var meuID = $(this).attr('id');
                     Calendar.setup({
@@ -330,12 +345,21 @@
             $('input[name=cpf]').mask("999.999.999-99",{placeholder:" "});
             $('input[name=cnpj]').mask("99.999.999/9999-99",{placeholder:" "});
             $('input[name*=valor]').mask("R$ 0.009,99");
-            // Se quiser limitar o tamanho máximo, utilizar o 'mask', no segundo caso, devidamente modificado.
-            // Para setar um mínimo obrigatório de caracteres, colocar o '?' no lugar apropriado. Neste caso,
-            // o login tem um mínimo de 5 caracteres e o 'nome completo' apenas 1.
-            /*$('#login').mask("aaaaa?aaaaaaaaaa", {placeholder:" "});
-            $('#nome_completo').mask("A?AAAAAAAAAAAAAAAAAAA", {placeholder:" "});*/
-            //Se for apenas limitar os caracteres e não o comprimento mínimo e máximo, então utilizar o 'alpha':
+
+
+			/***************************************************************************************
+			 * Se quiser limitar o tamanho máximo, utilizar o 'mask', no segundo caso, devidamente *
+			 * modificado.                                                                         *
+			 * Para setar um mínimo obrigatório de caracteres, colocar o '?' no lugar apropriado.  *
+			 * Neste caso, o login tem um mínimo de 5 caracteres e o 'nome completo' apenas 1.     *
+			 * Se for apenas limitar os caracteres e não o comprimento mínimo e máximo,            *
+			 * então utilizar o 'alpha':                                                           *
+			 ***************************************************************************************/
+
+			/*
+			   $('#login').mask("aaaaa?aaaaaaaaaa", {placeholder:" "});
+			   $('#nome_completo').mask("A?AAAAAAAAAAAAAAAAAAA", {placeholder:" "});
+			 */
             $('#login').alpha({allow: '_.', restraints:{nocaps:true}});
             $('#nome_completo').alpha({allow: 'áéíóúÁÉÍÓÚàèòùïüãõêñÀÈÒÙÏÜÃÕÊÑ '});
 
@@ -373,6 +397,7 @@
 
             });
 
+			$("#tabsForm").show('normal');
         });
 
     </script>
