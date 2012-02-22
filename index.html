@@ -335,7 +335,7 @@
                     completed: function() {
                             var cep = $(this).val();
                             $('#msg').html("Aqui devolve os dados do CEP " + cep + ".")
-                                     .dialog('show');
+                                     .dialog('open');
                 }
             });
             $('input[name=estado]').mask("aa",{placeholder:" "})
