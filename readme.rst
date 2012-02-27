@@ -2,7 +2,7 @@
 Zorbit Prototipo
 ###################
 
-O Zorbit Prototipo é um conjunto de bibliotecas que irá te auxiliar no desenvolvimento de seu sistema.
+O Zorbit FrontEnd é um conjunto de bibliotecas que irá te auxiliar no desenvolvimento de seu sistema.
 A baixo estão os componentes previstos:
 
 ###################
