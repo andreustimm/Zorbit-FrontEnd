@@ -1,7 +1,7 @@
-﻿// ** I18N
+// ** I18N
 
-// Calendar pt-BR language
-// Author: Fernando Dourado, <fernando.dourado@ig.com.br>
+// Calendar EN language
+// Author: Mihai Bazon, <mihai_bazon@yahoo.com>
 // Encoding: any
 // Distributed under the same terms as the calendar itself.
 
@@ -33,7 +33,19 @@ Calendar._DN = new Array
 // this feature.
 
 // short day names
-// [No changes using default values]
+Calendar._SDN = new Array
+("Dom",
+ "Seg",
+ "Ter",
+ "Qua",
+ "Qui",
+ "Sex",
+ "Sab",
+ "Dom");
+
+// First day of the week. "0" means display Sunday first, "1" means display
+// Monday first, etc.
+Calendar._FD = 0;
 
 // full month names
 Calendar._MN = new Array
@@ -51,7 +63,19 @@ Calendar._MN = new Array
  "Dezembro");
 
 // short month names
-// [No changes using default values]
+Calendar._SMN = new Array
+("Jan",
+ "Fev",
+ "Mar",
+ "Abr",
+ "Mai",
+ "Jun",
+ "Jul",
+ "Ago",
+ "Set",
+ "Out",
+ "Nov",
+ "Dez");
 
 // tooltips
 Calendar._TT = {};
@@ -70,21 +94,20 @@ Calendar._TT["ABOUT"] =
 "- Use as teclas \xab, \xbb para selecionar o ano\n" +
 "- Use as teclas " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " para selecionar o mês\n" +
 "- Clique e segure com o mouse em qualquer botão para selecionar rapidamente.";
-
 Calendar._TT["ABOUT_TIME"] = "\n\n" +
 "Selecionar hora:\n" +
 "- Clique em qualquer uma das partes da hora para aumentar\n" +
 "- ou Shift-clique para diminuir\n" +
 "- ou clique e arraste para selecionar rapidamente.";
 
-Calendar._TT["PREV_YEAR"] = "Ano anterior (clique e segure para menu)";
-Calendar._TT["PREV_MONTH"] = "Mês anterior (clique e segure para menu)";
-Calendar._TT["GO_TODAY"] = "Ir para a data atual";
-Calendar._TT["NEXT_MONTH"] = "Próximo mês (clique e segure para menu)";
-Calendar._TT["NEXT_YEAR"] = "Próximo ano (clique e segure para menu)";
-Calendar._TT["SEL_DATE"] = "Selecione uma data";
+Calendar._TT["PREV_YEAR"]    = "Ano anterior (clique e segure para menu)";
+Calendar._TT["PREV_MONTH"]   = "Mês anterior (clique e segure para menu)";
+Calendar._TT["GO_TODAY"]     = "Ir para a data atual";
+Calendar._TT["NEXT_MONTH"]   = "Próximo mês (clique e segure para menu)";
+Calendar._TT["NEXT_YEAR"]    = "Próximo ano (clique e segure para menu)";
+Calendar._TT["SEL_DATE"]     = "Selecione uma data";
 Calendar._TT["DRAG_TO_MOVE"] = "Clique e segure para mover";
-Calendar._TT["PART_TODAY"] = " (hoje)";
+Calendar._TT["PART_TODAY"]   = " (hoje)";
 
 // the following is to inform that "%s" is to be the first day of week
 // %s will be replaced with the day name.
@@ -105,4 +128,3 @@ Calendar._TT["TT_DATE_FORMAT"] = "%d de %B de %Y";
 
 Calendar._TT["WK"] = "sem";
 Calendar._TT["TIME"] = "Hora:";
-

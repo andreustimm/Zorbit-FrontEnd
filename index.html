@@ -256,7 +256,7 @@
     <script type="text/javascript" src="js/jquery.alphanumeric.js"></script>
     <script type="text/javascript" src="jscolor/jscolor.js"></script>
     <script type="text/javascript" src="js/jscalendar/calendar.js"></script>
-    <script type="text/javascript" src="js/jscalendar/lang/calendar-es.js"></script>
+    <script type="text/javascript" src="js/jscalendar/lang/calendar-br.js"></script>
     <script type="text/javascript" src="js/jscalendar/calendar-setup.js"></script>
     <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="ckeditor/skins/kama/skin.js"></script>
@@ -273,13 +273,14 @@
         $(function() {
 
             Calendar.setup({
-                inputField  : "data",              // ID of the input field
-                ifFormat    : "%d/%m/%Y",          // the date format
+                inputField  : "data",    // ID of the input field
+                ifFormat    : "%d/%m/%Y" // the date format
             });
+
             Calendar.setup({
-                inputField  : "diaehora",          // ID of the input field
+                inputField  : "diaehora",       // ID of the input field
                 showsTime   : true,
-                ifFormat    : "%d/%m/%Y %H:%M",    // the date format
+                ifFormat    : "%d/%m/%Y %H:%M" // the date format
             });
 
             var calendar = Calendar(1, null);
@@ -312,10 +313,9 @@
                 }
             });
 
-            $('input.fone').mask("(99) 9999-9999",{placeholder:" "});
-
             //Não bate com todos os telefones do mundo, mas quase...
             $('input[type=fone_en], input[rel=fone_en]').mask("+099 (099) 0999-9999",{placeholder:" "});
+            $('input[type=fone], input[rel=fone]').mask("(99) 9999-9999",{placeholder:" "});
 
             $('input[name=numero]').blur(function () {//efeitos do prototipo.
                 if ($('input[name=cep]').val().length == 9) $('input[name=cnpj]').focus();

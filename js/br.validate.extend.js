@@ -75,8 +75,6 @@ jQuery.validator.addMethod("cnpj", function(value, element) {
 	return true;
 }, "CNPJ inválido."); // Mensagem padrão
 
-
-
 jQuery.validator.addMethod(
   "checked",
   function(value, element){
