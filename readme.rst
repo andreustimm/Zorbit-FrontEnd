@@ -12,10 +12,9 @@ Componentes
 - TextArea (com limite min e max + counter)
 - [ok] Input Button
 - [ok] Input File
-- Input File Multiplo
+- [ok] Input File Multiplo
 - [ok] Input Radio
 - [ok] Input Checkbox
-- [ok] Input Password
 - [ok] Input Select
 - [ok] Input Select Multiplo
 - [ok] Input Number
@@ -24,26 +23,28 @@ Componentes
 - Input Data [dd/mm/yyyy]
 - Input Data e Hora [dd/mm/yyyy h:m]
 - Input Time [h:m]
-- Input Site (validação)
+- [ok] Input Site (validação)
++ [ok] URL de um servidor específico (no exemplo: facebook)
 - [ok] Input Email (validação)
 - [ok] Input Texto Livre
-- [ok] Input Só Letras [A-Za-záéíóúÁÉÍÓÚàèòùïüãõñçÀÈÒÙÏÜÃÕÑÇ]
+- [ok] Input Só Letras [A-Za-záéíóúÁÉÍÓÚàèòùïüãõñçÀÈÒÙÏÜÃÕÑÇôÔêÊ]
 - [ok] Input Login [a-zA-Z._-]
-- Input Fone [(99) 9999-9999]
+- [ok] Input Password (min., máx. e confirmação)
+- [ok] Input Fone [(99) 9999-9999]
 - Input Money (R$ 30,00)
 - Input Peso (3 casas decimais)
 - [ok] Input CEP  (máscara)
 - [ok] Input CPF  (máscara e validação)
 - [ok] Input CNPJ (máscara e validação)
-- [ok] ColorPiker
+- [ok] ColorPicker
 - [ok] HTML (editor WYSIWYG)
-- Abas
+- [ok] Abas
 - Gráficos
-- Dialog
+- [ok] Dialog (digitar o campo CEP...)
 - Slider
 - ToolTip
 - Splitter
-- Highlight / Error
+- [ok] Highlight / Error
 - Progress Bar
 - Accordion e Expander
 - Menu Encadiado (Drop Down)
