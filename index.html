@@ -369,7 +369,7 @@
                $('#nome_completo').mask("A?AAAAAAAAAAAAAAAAAAA", {placeholder:" "});
              */
             $('#login').alpha({allow: '_.', restraints:{nocaps:true}});
-            $('#nome_completo').alpha({allow: 'áéíóúÁÉÍÓÚàèòùïüãõêñçÀÈÒÙÏÜÃÕÊÑÇ '});
+            $('#nome_completo').alpha({allow: 'áéíóúÁÉÍÓÚàèòùïüãõêñçÀÈÒÙÏÜÃÕÊÑÇòÔ '});
 
             $('input[type=password]').mask("******?*********", {placeholder:''});
             $('#trans').change(function() {
@@ -379,11 +379,18 @@
 
             });
 
-            $('#msg').dialog({autoOpen: false});
+			$('#msg').dialog({
+				autoOpen:      false,
+				modal:         true,
+				closeOnEscape: true,
+				buttons: {
+					OK: function () {$(this).dialog('close')}
+					}
+				});
 
             $('#color').change(function() {
 
-                var colorEl = document.getElementById('color'); //Precisa ser o DOM element
+                var colorEl = document.getElementById('co:lor'); //Precisa ser o DOM element
                 var cor = '#' + $(this).val();
 
                 var r = colorEl.color.rgb[0] * 100;
