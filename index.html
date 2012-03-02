@@ -379,19 +379,19 @@
 
             });
 
-			$('#msg').dialog({
-				autoOpen:      false,
-				modal:         true,
-				closeOnEscape: true,
-				buttons: {
-					OK: function () {$(this).dialog('close')}
-					}
-				});
+            $('#msg').dialog({
+                autoOpen:      false,
+                modal:         true,
+                closeOnEscape: true,
+                buttons: {
+                    OK: function () {$(this).dialog('close')}
+                }
+            });
 
             $('#color').change(function() {
 
                 var colorEl = document.getElementById('color'); //Precisa ser o DOM element
-                var cor = '#' + $(this).val();
+                var cor     = '#' + $(this).val();
 
                 var r = colorEl.color.rgb[0] * 100;
                 var g = colorEl.color.rgb[1] * 100;

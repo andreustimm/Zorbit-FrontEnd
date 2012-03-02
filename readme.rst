@@ -3,7 +3,8 @@ Zorbit Prototipo
 ###################
 
 O Zorbit FrontEnd é um conjunto de bibliotecas que irá te auxiliar no desenvolvimento de seu sistema.
-A baixo estão os componentes previstos:
+Se você está cansado de trabalhar em vários projetos e ter que montar muitos componentes na "mão", sem nenhum padrão, com problemas de compatibilidade com browsers, sistemas operacionais, etc. Esse tempo já chegou ao fim.
+Veja a baixo alguns componentes previstos:
 
 ###################
 Componentes
