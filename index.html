@@ -173,7 +173,7 @@
                             <label for="fone">Telefone Estrangeiro</label>
                             <input type="fone_en" id="fone_en" placeholder="Telefone" class="fone" name="fone_en" rel="fone_en" />
                             <label for="numero">Número</label>
-                            <input type="number" class="numeric" name="numero" align="right" id="numero" pattern="(\d{1,3})+(.\d{3})*(,\d{2})" />
+                            <input type="text" class="numeric" onkeyup="numFmt(this)" name="numero" align="right" id="numero" pattern="(\d{1,3})+(.\d{3})*(,\d{2})" />
                         </p>
                         <p>
                             <label for="cpf">CPF</label>
@@ -269,6 +269,37 @@
         i.setAttribute("type", "range");
         rangeNotSupported = (i.type === "text");
         delete i;
+		/* Minha versão ... */
+		/* ============= Função FORMATA CNPJ =============================
+		   Nome da Função : numberFormat(formField)
+		   Formata um campo numérico a medida que ocorre a digitação
+		   Parâm.: campo.
+		   TODO: Se o campo tiver a class data-moneyField e data-moneyPrefix
+		   formata o campo como moeda, com o prefixo ou sufixo informado
+		   =================================================================*/
+		function numFmt(campo) {
+			var valor = campo.value;
+				valor = valor.replace(/\D/g, '');
+			var ln = valor.length;
+			/*
+			if (ln ==  2) campo.value = ',' + valor;
+			if (ln ==  6) campo.value = '.' + valor;
+			if (ln == 10) campo.value = '.' + valor;
+			 */
+			console.log(valor, ln);
+			if (ln > 8) {
+				campo.value = valor.replace(/^(\d{1,3})(\d{3})(\d{3})(\d\d)$/g, '$1.$2.$3,$4');
+				return true;
+			}
+			if (ln > 5) {
+				campo.value = valor.replace(/^(\d{1,3})(\d{3})(\d\d)$/g, '$1.$2,$3');
+				return true;
+			}
+			if (ln > 2) {
+				campo.value = valor.replace(/^(\d{1,3})(\d\d)$/g, '$1,$2');
+				return true;
+			}
+		}
 
         $(function() {
 
