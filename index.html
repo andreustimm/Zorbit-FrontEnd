@@ -173,7 +173,7 @@
                             <label for="fone">Telefone Estrangeiro</label>
                             <input type="fone_en" id="fone_en" placeholder="Telefone" class="fone" name="fone_en" rel="fone_en" />
                             <label for="numero">Número</label>
-                            <input type="text" class="numeric" onkeyup="numFmt(this)" name="numero" align="right" id="numero" pattern="(\d{1,3})+(.\d{3})*(,\d{2})" />
+                            <input type="text" class="numeric" onkeyup="numFmt(this)" name="numero" style="text-align:right" id="numero" pattern="(\d{1,3})+(.\d{3})*(,\d{2})" />
                         </p>
                         <p>
                             <label for="cpf">CPF</label>
@@ -269,36 +269,59 @@
         i.setAttribute("type", "range");
         rangeNotSupported = (i.type === "text");
         delete i;
+
+		// método 'repeat' para o objeto String
+		// ex. a='123'; b = a.repeat(3) -> b = '123123123'
+		String.prototype.repeat = function(iterates) 
+		{
+			if (iterates == undefined || iterates < 1) return "";
+			var str = this;
+			while (--iterates > 0) 
+			{
+				str += this;
+			}
+			return str;
+		}
+
 		/* Minha versão ... */
-		/* ============= Função FORMATA CNPJ =============================
-		   Nome da Função : numberFormat(formField)
+		/* ============= Função FORMATA NÚMERO ===========================
+		   Nome da Função : numFmt(DOM formField)
 		   Formata um campo numérico a medida que ocorre a digitação
 		   Parâm.: campo.
+		   PparseStr(rseInt(arâm.: options (obj)
+		   			prefix, suffix, decimals
 		   TODO: Se o campo tiver a class data-moneyField e data-moneyPrefix
 		   formata o campo como moeda, com o prefixo ou sufixo informado
 		   =================================================================*/
-		function numFmt(campo) {
+		function numFmt(campo, options) {
+			
+			if(options == undefined || options.decimals == undefined) {
+				options = new Object;
+				options.decimals = 2;
+			}
 			var valor = campo.value;
 				valor = valor.replace(/\D/g, '');
 			var ln = valor.length;
+			var tGroups = parseInt((ln-options.decimals)/3);
+			var thGroup  = "(\\d{3})".repeat(tGroups-1);
+			var decGroup = "(" + "\\d".repeat(options.decimals)+")";
+			var regEx = new RegExp("^(\\d{1,3})"+thGroup+decGroup+"$");
+				var grupos = tGroups;
+				var replaceString = "$1.";
+				while(grupos-- > 0) {
+					replaceString += "$"+(tGroups - grupos)+'.';
+				}
+				console.log(replaceString);
+			var repEx =  replaceString.substr(0, -1) + ",$" + (tGroups + 1);
+
 			/*
 			if (ln ==  2) campo.value = ',' + valor;
 			if (ln ==  6) campo.value = '.' + valor;
 			if (ln == 10) campo.value = '.' + valor;
 			 */
-			console.log(valor, ln);
-			if (ln > 8) {
-				campo.value = valor.replace(/^(\d{1,3})(\d{3})(\d{3})(\d\d)$/g, '$1.$2.$3,$4');
-				return true;
-			}
-			if (ln > 5) {
-				campo.value = valor.replace(/^(\d{1,3})(\d{3})(\d\d)$/g, '$1.$2,$3');
-				return true;
-			}
-			if (ln > 2) {
-				campo.value = valor.replace(/^(\d{1,3})(\d\d)$/g, '$1,$2');
-				return true;
-			}
+			console.log(valor, ln, tGroups, regEx, repEx);
+			campo.value = valor.replace(regEx, repEx);
+			return true;
 		}
 
         $(function() {
