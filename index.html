@@ -182,8 +182,10 @@
                             <label for="CNPJ">CNPJ</label>
                             <!--<input type="text" class="CNPJ" name="cnpj" id="cnpj" rel="cnpj" placeholder="Digite o CNPJ do Provedor" />-->
                             <input type="cnpj" class="CNPJ" name="cnpj" id="cnpj" rel="cnpj" placeholder="Digite o CNPJ do Provedor" />
+                            <label for="valor">Peso Total (kilogramas)</label>
+							<input type="text" id="peso" class='numeric' name="pesototal" onkeyup="numFmt(this,{suffix:' Kg',decimals:3})" />
                             <label for="valor">Valor Total (mudar)</label>
-                            <input type="text" id="valor" name="valor" />
+							<input type="text" id="valor" class='numeric' name="valor" onkeyup="numFmt(this,{prefix:'R$ '})" />
                         </p>
                     </fieldset>
                 </div>
@@ -295,32 +297,42 @@
 		   =================================================================*/
 		function numFmt(campo, options) {
 			
-			if(options == undefined || options.decimals == undefined) {
+			if(options == undefined) {
 				options = new Object;
+				options.decimals = 2;
+			}
+			if(options.decimals == undefined) {
 				options.decimals = 2;
 			}
 			var valor = campo.value;
 				valor = valor.replace(/\D/g, '');
 			var ln = valor.length;
-			var tGroups = parseInt((ln-options.decimals)/3);
-			var thGroup  = "(\\d{3})".repeat(tGroups-1);
+			var tGroups = Math.round((ln-options.decimals)/3+0.49);
+			var thGroup  = "(\\d{3})".repeat(tGroups - 1);
 			var decGroup = "(" + "\\d".repeat(options.decimals)+")";
-			var regEx = new RegExp("^(\\d{1,3})"+thGroup+decGroup+"$");
-				var grupos = tGroups;
-				var replaceString = "$1.";
-				while(grupos-- > 0) {
-					replaceString += "$"+(tGroups - grupos)+'.';
-				}
-				console.log(replaceString);
-			var repEx =  replaceString.substr(0, -1) + ",$" + (tGroups + 1);
+			var regEx  = new RegExp("^(\\d{1,3})"+thGroup+decGroup+"$");
+			var repStr = new Array('','','');
+			var grupos = tGroups;
+			var repString = '';
 
+			if (options.prefix != undefined) repStr[0] = options.prefix;
+			if (options.suffix != undefined) repStr[2] = options.suffix;
+
+			for(i = 2; i < tGroups+1; i++) {
+				repString += "$"+i+'.';
+			}
+			repString = "$1." + repString;
+			repString = repString.replace(/\.$/, '');
+			repStr[1] = repString + ',$' + i;
+
+			console.log(repStr.join(''));
 			/*
 			if (ln ==  2) campo.value = ',' + valor;
 			if (ln ==  6) campo.value = '.' + valor;
 			if (ln == 10) campo.value = '.' + valor;
 			 */
-			console.log(valor, ln, tGroups, regEx, repEx);
-			campo.value = valor.replace(regEx, repEx);
+			console.log(valor, ln, tGroups, regEx, repStr);
+			campo.value = valor.replace(regEx, repStr.join(''));
 			return true;
 		}
 
@@ -407,7 +419,7 @@
 
             $('input[rel=cpf], input[type=cpf]').mask("999.999.999-99",{placeholder:" "});
             $('input[rel=cnpj], input[type=cnpj]').mask("99.999.999/9999-99",{placeholder:" "});
-            $('input[name*=valor]').mask("R$ 0.009,99");
+            //$('input[name*=valor]').mask("R$ 0.009,99");
 
             /***************************************************************************************
              * Se quiser limitar o tamanho máximo, utilizar o 'mask', no segundo caso, devidamente *
